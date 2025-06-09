@@ -508,7 +508,7 @@ const App: React.FC = () => {
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8"><div className="flex items-center justify-between h-20">
                     <div className="flex items-center"><Building2 className="h-10 w-10 text-indigo-400" /><span className="ml-3 text-3xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-pink-500">RGU CSE Portal</span></div>
                     <nav className="hidden lg:flex space-x-2 items-center">
-                        {visibleNavItems.map((item: any) => <button key={item.name} onClick={() => setCurrentView(item.view)} className={`flex items-center px-3 py-2 rounded-lg text-sm font-medium transition-all duration-150 ease-in-out ${currentView === item.view ? 'bg-indigo-500 text-white shadow-md scale-105' : 'text-gray-300 hover:bg-slate-700 hover:text-white'}`}>{React.cloneElement(item.icon, { className: 'mr-2'})} {item.name}</button>)}
+                        {visibleNavItems.map((item) => <button key={item.name} onClick={() => setCurrentView(item.view)} className={`flex items-center px-3 py-2 rounded-lg text-sm font-medium transition-all duration-150 ease-in-out ${currentView === item.view ? 'bg-indigo-500 text-white shadow-md scale-105' : 'text-gray-300 hover:bg-slate-700 hover:text-white'}`}>{React.cloneElement(item.icon, { className: 'mr-2'})} {item.name}</button>)}
                     </nav>
                      <div className="flex items-center"><ProfileDropdown /></div>
                 </div></div>
@@ -531,3 +531,4 @@ const App: React.FC = () => {
 // --- 10. ROOT COMPONENT ---
 const ProductionApp = () => ( <ErrorBoundary> <AuthProvider> <App /> </AuthProvider> </ErrorBoundary> );
 export default ProductionApp;
+
