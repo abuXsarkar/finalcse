@@ -286,7 +286,7 @@ const ContentList: React.FC<{ type: PostType; items: any[]; title: string; icon:
   return (
     <Card>
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 pb-4 border-b border-slate-700">
-        <div className="flex items-center mb-4 sm:mb-0">{React.cloneElement(icon, { className: "h-10 w-10 mr-4" })}<h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-pink-500">{title}</h2></div>
+        <div className="flex items-center mb-4 sm:mb-0">{React.cloneElement(icon, { className: "h-10 w-10 mr-4" } as any)}<h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-pink-500">{title}</h2></div>
         {canPost && (<button onClick={() => openModal(type)} className="flex items-center bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition duration-150 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75"><PlusCircle size={20} className="mr-2" /> Create New {type.charAt(0).toUpperCase() + type.slice(1)}</button>)}
       </div>
       {error && <Alert type="error" message={error} />}
@@ -314,7 +314,7 @@ const AboutPage: React.FC = () => (
 
 const PlaceholderPage: React.FC<{ title: string; icon: React.ReactElement; description: string }> = ({ title, icon, description }) => (
     <Card className="text-center">
-      <div className="flex justify-center items-center mb-6">{React.cloneElement(icon, { size: 48, className: "text-indigo-400"})}</div>
+      <div className="flex justify-center items-center mb-6">{React.cloneElement(icon as React.ReactElement<any>, { size: 48, className: "text-indigo-400" })}</div>
       <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-pink-500 mb-4">{title}</h2>
       <p className="text-lg text-slate-400 mb-2">Coming Soon!</p><p className="text-md text-slate-500 leading-relaxed max-w-2xl mx-auto">{description}</p>
       <div className="mt-8 p-4 border border-dashed border-slate-600 rounded-lg bg-slate-700/50"><h4 className="font-semibold text-indigo-300 mb-2">Technical Vision:</h4><p className="text-sm text-slate-400">This module will be built using Firebase Storage for uploads and Firebase Functions for processing.</p></div>
@@ -508,7 +508,7 @@ const App: React.FC = () => {
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8"><div className="flex items-center justify-between h-20">
                     <div className="flex items-center"><Building2 className="h-10 w-10 text-indigo-400" /><span className="ml-3 text-3xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-pink-500">RGU CSE Portal</span></div>
                     <nav className="hidden lg:flex space-x-2 items-center">
-                        {visibleNavItems.map((item) => <button key={item.name} onClick={() => setCurrentView(item.view)} className={`flex items-center px-3 py-2 rounded-lg text-sm font-medium transition-all duration-150 ease-in-out ${currentView === item.view ? 'bg-indigo-500 text-white shadow-md scale-105' : 'text-gray-300 hover:bg-slate-700 hover:text-white'}`}>{React.cloneElement(item.icon, { className: 'mr-2'})} {item.name}</button>)}
+                        {visibleNavItems.map((item) => <button key={item.name} onClick={() => setCurrentView(item.view)} className={`flex items-center px-3 py-2 rounded-lg text-sm font-medium transition-all duration-150 ease-in-out ${currentView === item.view ? 'bg-indigo-500 text-white shadow-md scale-105' : 'text-gray-300 hover:bg-slate-700 hover:text-white'}`}>{React.cloneElement(item.icon as React.ReactElement<any>, { className: 'mr-2'})} {item.name}</button>)}
                     </nav>
                      <div className="flex items-center"><ProfileDropdown /></div>
                 </div></div>
