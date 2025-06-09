@@ -1,7 +1,7 @@
 import React, { useState, useEffect, createContext, useContext, useRef } from 'react';
 import { initializeApp, FirebaseApp } from 'firebase/app';
 import { getAuth, Auth, onAuthStateChanged, User as FirebaseUser, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { getFirestore, Firestore, collection, addDoc, onSnapshot, query, orderBy, doc, setDoc, getDoc, Timestamp, serverTimestamp, setLogLevel } from 'firebase/firestore';
+import { getFirestore, Firestore, collection, addDoc, onSnapshot, query, orderBy, limit, doc, setDoc, getDoc, Timestamp, serverTimestamp, setLogLevel } from 'firebase/firestore';
 import { AlertTriangle, Award, Bell, Briefcase, CalendarDays, CheckCircle, Building2, Image as ImageIcon, Info, Library, LogIn, LogOut, MessageCircle as MessageCircleIcon, PlusCircle, RefreshCw, Send, Settings, ShieldCheck, UserCircle, UserPlus, XCircle } from 'lucide-react';
 
 // --- 1. GLOBAL DECLARATIONS & ENVIRONMENT VARIABLES ---
@@ -221,7 +221,7 @@ const ChatPage: React.FC = () => {
         if (!db) return;
         setIsLoading(true);
         const chatCollectionPath = `artifacts/${appId}/public/data/chat_channels/${channelId}/messages`;
-        const q = query(collection(db, chatCollectionPath), orderBy('createdAt', 'asc'), { limit: 100 });
+        const q = query(collection(db, chatCollectionPath), orderBy('createdAt', 'asc'), limit(100));
         const unsubscribe = onSnapshot(q, (snapshot) => {
             setMessages(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as ChatMessage)));
             setIsLoading(false);
@@ -508,7 +508,7 @@ const App: React.FC = () => {
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8"><div className="flex items-center justify-between h-20">
                     <div className="flex items-center"><Building2 className="h-10 w-10 text-indigo-400" /><span className="ml-3 text-3xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-pink-500">RGU CSE Portal</span></div>
                     <nav className="hidden lg:flex space-x-2 items-center">
-                        {visibleNavItems.map((item) => <button key={item.name} onClick={() => setCurrentView(item.view)} className={`flex items-center px-3 py-2 rounded-lg text-sm font-medium transition-all duration-150 ease-in-out ${currentView === item.view ? 'bg-indigo-500 text-white shadow-md scale-105' : 'text-gray-300 hover:bg-slate-700 hover:text-white'}`}>{React.cloneElement(item.icon, { className: 'mr-2'})} {item.name}</button>)}
+                        {visibleNavItems.map((item: any) => <button key={item.name} onClick={() => setCurrentView(item.view)} className={`flex items-center px-3 py-2 rounded-lg text-sm font-medium transition-all duration-150 ease-in-out ${currentView === item.view ? 'bg-indigo-500 text-white shadow-md scale-105' : 'text-gray-300 hover:bg-slate-700 hover:text-white'}`}>{React.cloneElement(item.icon, { className: 'mr-2'})} {item.name}</button>)}
                     </nav>
                      <div className="flex items-center"><ProfileDropdown /></div>
                 </div></div>
